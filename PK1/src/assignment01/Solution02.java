@@ -4,16 +4,17 @@ public class Solution02 {
 
     public static void main(String[] args) {
 
-        short studentsAttendingPK1 = 182;
-        short studentsEnroled = 12000;
-        int populationEU = 447706209;
-        long populationEarth = 7753000000l;
-        byte semestersPlanned = 6;
-        char lastName = 'L';
-        float averageGrade = 1.0f;
-        boolean isLeapYear = false;
+        short studentsAttendingPK1 = 182; //used 2 bytes
+        short studentsEnrolled = 12000; //used 2 bytes
+        int populationEU = 447706209; //used 4 bytes
+        long populationEarth = 7753000000l; //used 8 bytes
+        byte semestersPlanned = 6; //used 1 byte
+        char lastName = 'L'; //used 2 bytes
+        float averageGrade = 1.0f; // 4 bytes
+        boolean isLeapYear = false; // 1 of 8 bytes
 
 
+        System.out.println(studentsEnrolled);
     }
 
 }

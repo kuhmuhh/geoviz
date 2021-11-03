@@ -23,10 +23,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../kai.leibold" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kaija\Desktop\kai.leibold" />
+      <recent name="C:\Users\kaija\Desktop\PK1" />
+      <recent name="C:\Users\kaija\Desktop\kai.leibold\PK1" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Solution05">
     <configuration name="Solution01" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -114,7 +121,7 @@
       <updated>1635887339985</updated>
       <workItem from="1635887341487" duration="46000" />
       <workItem from="1635945810524" duration="74000" />
-      <workItem from="1635946162943" duration="276000" />
+      <workItem from="1635946162943" duration="664000" />
     </task>
     <servers />
   </component>

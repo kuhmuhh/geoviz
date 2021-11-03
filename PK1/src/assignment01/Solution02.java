@@ -13,8 +13,6 @@ public class Solution02 {
         float averageGrade = 1.0f; // 4 bytes
         boolean isLeapYear = false; // 1 of 8 bytes
 
-
-        System.out.println(studentsEnrolled);
     }
 
 }

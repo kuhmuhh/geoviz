@@ -17,7 +17,7 @@ public class Solution06 {
         years = givenNumber / secondsPerYear;
         days = (givenNumber % secondsPerYear) / secondsPerDay;
         hours = (givenNumber -years * secondsPerYear -days * secondsPerDay)/secondsPerHour;
-        minutes = givenNumber / 60 % 60;
+        minutes = givenNumber / secondsPerMinutes % 60;
         seconds = givenNumber % 60;
 
         System.out.println("years : " + years);

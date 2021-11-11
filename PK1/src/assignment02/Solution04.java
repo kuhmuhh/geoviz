@@ -1,4 +1,4 @@
-package assignment01;
+package assignment02;
 
 public class Solution04 {
     public static void main(String[] args) {

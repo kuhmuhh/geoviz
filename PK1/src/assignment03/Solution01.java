@@ -18,7 +18,7 @@ public class Solution01 {
      * @param value1 - Value 1
      * @param value2 - Value 2
      * @param value3 - Value 3
-     * @return max
+     * @return maximum
      */
     public static int max(int value1, int value2, int value3){
 

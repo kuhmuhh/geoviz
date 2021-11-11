@@ -1,0 +1,16 @@
+Assignment 2
+=============
+
+1: [ 1 / 1 ]
+2: [ 1 / 1 ]
+3: [ 1 / 1 ]
+4: [ 1 / 1 ]
+5: [ 2 / 2 ]
+6: [ 2 / 2 ]
+
+S: [ 2 / 2 ]
+T: [ 10 / 10 ]
+
+Notes
+=============
+Bitte die Assignment Nummern richtig machen, 2 ist bei dir unter 1 abgespeichert.

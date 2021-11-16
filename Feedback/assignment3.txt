@@ -1,0 +1,14 @@
+Assignment 3
+=============
+
+1: [ 1 / 1 ]
+2: [ 2 / 2 ]
+3: [ 2 / 2 ]
+4: [ 3 / 3 ]
+
+S: [ 2 / 2 ]
+T: [ 10 / 10 ]
+
+Notes
+=============
+Style: Describe your parameters in javadoc, even when they're obvious

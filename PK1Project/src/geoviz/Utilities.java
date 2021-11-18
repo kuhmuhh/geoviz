@@ -4,10 +4,13 @@ public class Utilities {
 
     public static void main(String[] args) {
 
+        double[][] points = {{1,1},{2,2},{1,2},{2,1}};
+
         System.out.println(round2(2.046234183));
         System.out.println(getIntercept(3,1,-1,5));
         System.out.println(isParallel(0.3,0.5));
         System.out.println(isOrthogonal(0.1,-10));
+        printArray(getPointOfIntersection(points[0],points[1],points[2],points[3]));
     }
 
     /**
@@ -130,6 +133,50 @@ public class Utilities {
             return false;
         }
 
+    }
+
+    /**
+     * This method takes 4 arrays as input (each array is representing a data point)
+     * it calculates the point of intersection by using the lines from point 1 to point 2 and point 3 to point 4
+     * @param point1
+     * @param point2
+     * @param point3
+     * @param point4
+     * @return coordinates of point of intersection as a double array(first entry x-coordinate second entry y-coordinate)
+     */
+    public static double[] getPointOfIntersection(double[] point1, double[] point2, double[] point3, double[] point4){
+
+
+        double slopeLine1and2 = getSlope(point1[0],point1[1],point2[0],point2[1]);
+        double slopeLine3and4 = getSlope(point3[0],point3[1],point4[0],point4[1]);
+        double intercept12 = getIntercept(point1[0],point1[1],point2[0],point2[1]);
+        double intercept34 = getIntercept(point3[0],point3[1],point4[0],point4[1]);
+        double xCoord;
+        double yCoord;
+
+
+        if (doubleComparison(slopeLine1and2,slopeLine3and4) == true){
+            return null;
+        }
+        else{
+            xCoord = ((intercept34-intercept12)/(slopeLine1and2-slopeLine3and4));
+            yCoord = slopeLine1and2 * xCoord + intercept12;
+        }
+
+        double[] intersect ={xCoord,yCoord};
+        return intersect;
+
+    }
+
+    /**
+     * This method prints out a double array
+     * @param a
+     */
+    public static void printArray(double[] a){
+        for (double element : a){
+            System.out.println(element + " ");
+        }
+        System.out.println();
     }
 
 }

@@ -67,7 +67,7 @@ public class Solution05 {
 
     /**
      * This method recursively sums up two neighboring elements of an array until there is only one element left
-     * @param numbers int array
+     * @param numbers integer array
      */
     public static void triangleSum(int[] numbers){
         int i=0;
@@ -85,9 +85,9 @@ public class Solution05 {
 
     /**
      * This method helps the triangleSum method to sum up the array
-     * @param numbers int array
+     * @param numbers integer array
      * @param i       index
-     * @param help    int array for temporary storage
+     * @param help    integer array for temporary storage
      * @return int array which has been summed up
      */
     public static int[] triangleSumHelper(int[] numbers, int i, int[] help){

@@ -48,7 +48,7 @@ public class Solution05 {
 
     /**
      * This method implements the Collatz conjecture recursively
-     * @param n any positive int number
+     * @param n any positive integer number
      */
     public static void  collatzSequence(int n){
         System.out.print(n + " | ");

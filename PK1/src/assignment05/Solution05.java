@@ -72,12 +72,14 @@ public class Solution05 {
     public static void triangleSum(int[] numbers){
         int i=0;
         if (numbers.length == 1){
-            printArray(numbers);
+            printArrayRecursive(numbers,0);
         }
         else{
             int [] help = new int[numbers.length -1];
             help = triangleSumHelper(numbers,i,help);
             triangleSum(help);
+            System.out.println();
+            printArrayRecursive(numbers,0);
         }
     }
 
@@ -90,7 +92,6 @@ public class Solution05 {
      */
     public static int[] triangleSumHelper(int[] numbers, int i, int[] help){
         if (i == numbers.length-1){
-            printArray(numbers);
             return numbers;
         }
         else {
@@ -102,14 +103,19 @@ public class Solution05 {
     }
 
     /**
-     * This method prints out an integer array
-     * @param array
+     * This method recursively prints out an integer array
+     * @param array integer array
+     * @param i     index
      */
-    public static void printArray(int[] array){
-        for (int element : array){
-            System.out.print(element + " ");
+    public static void printArrayRecursive(int[] array, int i){
+        if (i == array.length){
+            return;
         }
-        System.out.println();
+        else {
+            System.out.print(array[i] + " ");
+            i++;
+            printArrayRecursive(array,i);
+        }
 
     }
 

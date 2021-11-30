@@ -1,0 +1,13 @@
+Assignment 5
+=============
+
+1: [ 2 / 2 ]
+2: [ 2 / 2 ]
+3: [ 4 / 4 ]
+
+S: [ 2 / 2 ]
+T: [ 10 / 10 ]
+
+Notes
+=============
+Please hand in a separate file for each solution.

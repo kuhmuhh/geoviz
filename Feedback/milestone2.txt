@@ -1,0 +1,4 @@
+Milestone 2
+=============
+
+instead of <some boolean expression> == true simply use <some boolean expression>

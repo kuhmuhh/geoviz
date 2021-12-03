@@ -155,7 +155,7 @@ public class Utilities {
         double yCoord;
 
 
-        if (doubleComparison(slopeLine1and2,slopeLine3and4) == true){
+        if (doubleComparison(slopeLine1and2,slopeLine3and4)){
             return null;
         }
         else{

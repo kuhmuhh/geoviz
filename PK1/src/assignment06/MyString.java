@@ -1,10 +1,8 @@
-package assingment06;
+package assignment06;
 
 public class MyString {
 
     private char[] string;
-
-    //public MyString(){}
 
     public MyString(char... values){
         this.string = copyArray(values);
@@ -98,7 +96,7 @@ public class MyString {
         for (int i = string.length; i < string.length+symbols.length; i ++){
             added[i] = symbols[j];
             j++;
-        } //????? nicht  fertig
+        }
         string = added;
     }
 

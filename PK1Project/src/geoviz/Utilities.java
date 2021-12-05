@@ -2,6 +2,7 @@ package geoviz;
 
 public class Utilities {
 
+    /*
     public static void main(String[] args) {
 
         double[][] points = {{1,1},{2,2},{1,2},{2,1}};
@@ -12,6 +13,7 @@ public class Utilities {
         System.out.println(isOrthogonal(0.1,-10));
         printArray(getPointOfIntersection(points[0],points[1],points[2],points[3]));
     }
+    */
 
     /**
      * This method detects if two double values are equal
@@ -136,21 +138,23 @@ public class Utilities {
     }
 
     /**
-     * This method takes 4 arrays as input (each array is representing a data point)
+     * This method takes 4 MyPoints as input (each MyPoint is representing a data point)
      * it calculates the point of intersection by using the lines from point 1 to point 2 and point 3 to point 4
      * @param point1
      * @param point2
      * @param point3
      * @param point4
-     * @return coordinates of point of intersection as a double array(first entry x-coordinate second entry y-coordinate)
+     * @return coordinates of point of intersection as a MyPoint
      */
-    public static double[] getPointOfIntersection(double[] point1, double[] point2, double[] point3, double[] point4){
+    public static MyPoint getPointOfIntersection(MyPoint point1, MyPoint point2, MyPoint point3, MyPoint point4){
 
+        MyLine line1 = new MyLine(point1,point2);
+        MyLine line2 = new MyLine(point3,point4);
 
-        double slopeLine1and2 = getSlope(point1[0],point1[1],point2[0],point2[1]);
-        double slopeLine3and4 = getSlope(point3[0],point3[1],point4[0],point4[1]);
-        double intercept12 = getIntercept(point1[0],point1[1],point2[0],point2[1]);
-        double intercept34 = getIntercept(point3[0],point3[1],point4[0],point4[1]);
+        double slopeLine1and2 = line1.getSlope();
+        double slopeLine3and4 = line2.getSlope();
+        double intercept12 = line1.getIntercept();
+        double intercept34 = line2.getIntercept();
         double xCoord;
         double yCoord;
 
@@ -163,9 +167,39 @@ public class Utilities {
             yCoord = slopeLine1and2 * xCoord + intercept12;
         }
 
-        double[] intersect ={xCoord,yCoord};
-        return intersect;
+        MyPoint intersect = new MyPoint(xCoord,yCoord);
 
+        return intersect;
+    }
+
+    /**
+     * This method takes 2 MyLine as an input (each MyLine is representing a line between two data points)
+     * it calculates the point of intersection by using by using the lines
+     * @param line1
+     * @param line2
+     * @return point of intersection
+     */
+    public static MyPoint getPointOfIntersection(MyLine line1, MyLine line2){
+
+        double slopeLine1and2 = line1.getSlope();
+        double slopeLine3and4 = line2.getSlope();
+        double intercept12 = line1.getIntercept();
+        double intercept34 = line2.getIntercept();
+        double xCoord;
+        double yCoord;
+
+
+        if (doubleComparison(slopeLine1and2,slopeLine3and4)){
+            return null;
+        }
+        else{
+            xCoord = ((intercept34-intercept12)/(slopeLine1and2-slopeLine3and4));
+            yCoord = slopeLine1and2 * xCoord + intercept12;
+        }
+
+        MyPoint intersect = new MyPoint(xCoord,yCoord);
+
+        return intersect;
     }
 
     /**

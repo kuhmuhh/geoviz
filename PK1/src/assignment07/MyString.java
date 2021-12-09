@@ -238,6 +238,12 @@ public class MyString {
         return help;
     }
 
+    /**
+     * This method returns a  MyString instance only containing characters
+     * from the index 0 to the given final end index
+     * @param end index of char array
+     * @return MyString instance ranging from index 0 to given end index
+     */
     public MyString subMyString(int end){
         MyString sub = new MyString();
         char[] help = new char[end+1];
@@ -248,6 +254,13 @@ public class MyString {
         return sub;
     }
 
+    /**
+     * This method returns a MyString instance only containing characters
+     * from the given start index to the given end index
+     * @param start index of start
+     * @param end index of end
+     * @return MyString instance ranging from start index to end index
+     */
     public MyString subMyString(int start, int end){
         int j = 0;
         MyString sub = new MyString();
@@ -260,6 +273,10 @@ public class MyString {
         return sub;
     }
 
+    /**
+     * This method returns a copy of the array of the object
+     * @return char array
+     */
     public char[] copyArray(){
         char[] copy = new char[string.length];
         for (int i = 0; i < string.length; i++){

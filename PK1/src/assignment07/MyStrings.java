@@ -2,6 +2,12 @@ package assignment07;
 
 public class MyStrings {
 
+    /**
+     * This method checks whether two MyString instances are equal
+     * @param a MyString instance
+     * @param b MyString instance
+     * @return true or false
+     */
     public static boolean isEqual(MyString a, MyString b){
 
         char[] aArray = a.copyArray();

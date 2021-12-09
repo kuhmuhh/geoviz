@@ -6,10 +6,17 @@ public class MyList {
     private Node current;
     private int size = 0;
 
+    /**
+     * Constructor
+     */
     public MyList(){
 
     }
 
+    /**
+     * Constructor
+     * @param value content of first Node
+     */
     public MyList(int value){
         Node root = new Node(value);
         this.first = root;
@@ -17,6 +24,10 @@ public class MyList {
         this.size++;
     }
 
+    /**
+     * This method adds a new node to the list
+     * @param value content of the added node
+     */
     public void add(int value)
     {
         Node newNode = new Node(value);
@@ -33,6 +44,12 @@ public class MyList {
         }
     }
 
+
+    /**
+     * This method gets the content of a node at the given index
+     * @param i index of desired node
+     * @return content of node
+     */
     public int get(int i)
     {
         if(i >= 0 && i < this.size){
@@ -53,6 +70,11 @@ public class MyList {
         }
     }
 
+    /**
+     * This method removes a node containing a given value from the list
+     * @param value value of node to be removed
+     * @return true or false
+     */
     public boolean remove(int value){
         Node tmp = first;
         Node tmp2 = first;
@@ -77,6 +99,11 @@ public class MyList {
         return false;
     }
 
+    /**
+     * This method searches for the index of a node containing a given value
+     * @param value value to be searched for
+     * @return index of node containing given value
+     */
     public int search(int value){
         for (int i = 0; i < size; i++){
             if (value == get(i)){

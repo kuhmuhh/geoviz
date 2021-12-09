@@ -54,16 +54,26 @@ public class MyList {
     }
 
     public boolean remove(int value){
-        if (value == get(0)){
-            this.first = first.getNext();
-            return true;
-        }/*
-        if (value == get(size-1)){
+        Node tmp = first;
+        Node tmp2 = first;
 
+
+        for (int i = 0; i < size; i++){
+            if (value == get(i)){
+                if (tmp == first){
+                    first = first.getNext();
+                }
+                else {
+                    tmp2.setNext(tmp.getNext());
+                }
+                this.size--;
+                return true;
+            }
+            else {
+                tmp2 = tmp;
+                tmp = tmp.getNext();
+            }
         }
-        else {
-
-        }*/
         return false;
     }
 

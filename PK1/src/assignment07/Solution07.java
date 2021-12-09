@@ -58,7 +58,7 @@ public class Solution07 {
         System.out.println("The length of the route "+ s +" is "+ s.getLength() +".");
         */
 
-
+        /*
         MyList list = new MyList();
         list.add(3);
         list.add(1);
@@ -68,10 +68,10 @@ public class Solution07 {
         list.add(4);
         list.add(8);
         list.add(5);
-        list.get(3);
         //System.out.println(list.search(8));
         list.remove(3);
-        System.out.println(list.get(0));
+        System.out.println(list.get(4));
+        */
 
     }
 

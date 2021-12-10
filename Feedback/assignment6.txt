@@ -1,0 +1,11 @@
+Assignment 6
+=============
+
+1: [ 8 / 8 ]
+
+S: [ 2 / 2 ]
+T: [ 10 / 10 ]
+
+Notes
+=============
+Use your MyString::isVowel method in MyString::isConsonant, do not repeat yourself.

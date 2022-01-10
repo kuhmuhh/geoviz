@@ -1,5 +1,8 @@
 package assignment09;
 
+/**
+ * This class is used to check whether two MyString instances are equal
+ */
 public class MyStrings {
 
     /**

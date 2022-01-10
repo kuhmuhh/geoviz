@@ -1,5 +1,10 @@
 package assignment09;
 
+import java.util.Arrays;
+
+/**
+ * This class implements a String data type
+ */
 public class MyString {
 
     private char[] string;
@@ -297,14 +302,27 @@ public class MyString {
         return sum;
     }
 
-    /*
-    public void output(MyString[] array){
-        for (int i = 0; i < array.length; i++){
-            System.out.println(array[i]);
-            System.out.println("length: " + array[i].getLength());
-            System.out.println("number of vowels: " + array[i].countVowels());
-            System.out.println("sum of characters: " + array[i].sumOfDecimal());
-        }
-    }*/
+    /**
+     * This method calculates the sum of decimal values of all char symbols
+     * @return sum
+     */
+    public int sumDecimal(){
+        int length = string.length;
+        int value = 0;
+        char[] array = string;
 
+        for (int i = 0; i < length; i++){
+            value = value + array[i];
+        }
+        return value;
+    }
+
+    /**
+     * This method returns the content of the array into a String
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return Arrays.toString(string);
+    }
 }

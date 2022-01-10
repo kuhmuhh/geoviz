@@ -1,5 +1,9 @@
 package assignment09;
 
+/**
+ * This class implements a generic node
+ * @param <T>
+ */
 public class Node<T> {
 
     private Node next;

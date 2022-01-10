@@ -1,5 +1,9 @@
 package assignment09;
 
+/**
+ * This class implements a generic list
+ * @param <T>
+ */
 public class MyList<T>{
 
     private static final Object T = -1;
@@ -7,7 +11,7 @@ public class MyList<T>{
     private Node current;
     private int size = 0;
 
-    /*
+    /**
      * Constructor
      */
     public MyList(){

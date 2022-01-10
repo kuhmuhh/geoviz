@@ -2,6 +2,9 @@ package assignment09;
 
 import java.util.Arrays;
 
+/**
+ * main class
+ */
 public class Solution09 {
     public static void main(String[] args) {
 
@@ -14,10 +17,21 @@ public class Solution09 {
         MyString f = new MyString('Z', 'e', 't', 'a');
         MyString g = new MyString('E', 't', 'a');
 
-        MyString[] toSort = {a, b, c, d, e, f, g};
+        MyString[] toSort = {b, a, d, e,f ,c , g};
+
+        System.out.println("Unsorted Array: \n");
+        for (MyString s: toSort){
+            System.out.println(s.toString() + " Length is: " + s.getLength() + ", Number of Vowels is: " + s.countVowels() + ", Value is: " + s.sumDecimal());
+        }
+
         Arrays.sort(toSort, new MyStringComparator());
-        System.out.println(toSort[0]);
+
+        System.out.println("Sorted Array: \n");
+        for (MyString s: toSort){
+            System.out.println(s.toString() + " Length is: " + s.getLength() + ", Number of Vowels is: " + s.countVowels() + ", Value is: " + s.sumDecimal());
+        }
         */
+
 
         Yen.setRate(0.0088);
         Pound.setRate(1.2605);
@@ -28,24 +42,39 @@ public class Solution09 {
 
         System.out.println("Based on your money you have to pay: " + calculateTaxes(money) + " US-Dollar in taxes");
 
+
+
     }
 
+    /**
+     * This method calculates the taxes in dollar value
+     * @param money
+     * @return taxes
+     */
     public static double calculateTaxes(MyList<Currency> money){
-        double tax;
-        double total = 0;
-        int size;
-        double tmp;
+        double end = money.getSize();
+        double value = 0;
 
-        size = money.getSize();
+        if (end >= 0){
+            int i = 0;
 
-        for (int i = 0; i <= size; i++){
-            tmp = money.get(i);
-            total = total * tmp;
+            if (end == 0){
+                Currency tmp = money.get(0);
+                return tmp.dollarValue() * 0.09;
+            }
+            else{
+                while (i < end){
+                    Currency tmp = money.get(i);
+                    value = value + tmp.dollarValue();
+                    i++;
+                    tmp = money.get(i);
+                }
+                return value * 0.09;
+            }
         }
-
-        tax = total * 0.09;
-
-        return tax;
+        else {
+            return value;
+        }
     }
 
 }

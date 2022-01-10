@@ -10,7 +10,7 @@ public class Pound extends Currency{
     private double pound;
 
     /**
-     * Construcot
+     * Constructor
      * @param amount amount in Pound
      */
     Pound(double amount){

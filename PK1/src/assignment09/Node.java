@@ -2,42 +2,49 @@ package assignment09;
 
 /**
  * This class implements a generic node
- * @param <T>
+ * @param <E>
  */
-public class Node<T> {
-
-    private Node next;
-    private T content;
+public class Node<E>
+{
+    private Node<E> next;
+    private E content;
 
     /**
      * Constructor
-     * @param content content
+     * @param content content to be added
      */
-    public Node(T content){
+    public Node(E content)
+    {
         this.content = content;
     }
 
     /**
      * This method sets the next node
-     * @param next next node
+     *
+     * @param next the next node
      */
-    public void setNext(Node next) {
+    public void setNext(Node<E> next)
+    {
         this.next = next;
     }
 
     /**
-     * This method gets the next node
-     * @return next node
+     * This method returns the next node
+     *
+     * @return the next node
      */
-    public Node getNext() {
-        return next;
+    public Node<E> getNext()
+    {
+        return this.next;
     }
 
     /**
      * This method gets the content of a node
-     * @return content
+     *
+     * @return the content stored in this node.
      */
-    public T getContent() {
-        return content;
+    public E getContent()
+    {
+        return this.content;
     }
 }

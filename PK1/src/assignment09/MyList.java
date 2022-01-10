@@ -1,50 +1,37 @@
 package assignment09;
 
+
 /**
  * This class implements a generic list
- * @param <T>
+ * @param <E>
  */
-public class MyList<T>{
+public class MyList<E>
 
-    private static final Object T = -1;
-    private Node first;
-    private Node current;
+{
+    private Node<E> first;
+    private Node<E> current;
     private int size = 0;
 
     /**
-     * Constructor
+     * (*12*)
+     * We also have to modify the add method because here the parameter needs
+     * to be more flexible. We cannot just store Strings but any kind of type.
+     * Therefore, we have to replace:
+     * 					String content
+     * with
+     * 					E content
+     *
+     * @param content - any object can be stored in our data structure
      */
-    public MyList(){
-
-    }
-
-    /**
-     * This method returns the size of the list
-     * @return size of list
-     */
-    public int getSize() {
-        return size;
-    }
-
-    /**
-     * Constructor
-     * @param value content of first Node
-     */
-    public MyList(T value){
-        Node root = new Node(value);
-        this.first = root;
-        this.current = root;
-        this.size++;
-    }
-
-    /**
-     * This method adds a new node to the list
-     * @param value content of the added node
-     */
-    public void add(T value)
+    public void add(E content)
     {
-        Node newNode = new Node(value);
         this.size++;
+        /*
+         * Again, we have to specify what kind of type the Node expects. It is
+         * the same type as the MyList data structure.
+         */
+        Node<E> newNode = new Node<E>(content);
+
         if (this.first == null)
         {
             this.first = newNode;
@@ -57,77 +44,44 @@ public class MyList<T>{
         }
     }
 
-
     /**
-     * This method gets the content of a node at the given index
-     * @param i index of desired node
-     * @return content of node
+     * What kind of type do we get from our data structure? Previously, it was
+     * just Strings. But now, since we are more flexible it is a type variable.
+     *
+     * @param i - the position in the data structure we are looking at
+     * @return - the object stored in the data structure
      */
-    public <T> T get(int i)
+    public E get(int i)
     {
-        if(i >= 0 && i < this.size){
-            Node tmp = first;
-            if(i == 0){
-                return (T) tmp.getContent();
+        if(i >= 0 && i < this.size)
+        {
+            Node<E> tmp = first;
+            if(i == 0)
+            {
+                return tmp.getContent();
             }
-            else{
-                while(i > 0){
+            else
+            {
+                while(i > 0)
+                {
                     tmp = tmp.getNext();
                     i--;
                 }
-                return (T) tmp.getContent();
+                return tmp.getContent();
             }
         }
-        else {
-            return (T) T;
+        else
+        {
+            return null;
         }
-
-
     }
 
     /**
-     * This method removes a node containing a given value from the list
-     * @param value value of node to be removed
-     * @return true or false
+     * This method returns the amount of elements in the list
+     * @return amount of elements in int
      */
-    public boolean remove(T value){
-        Node tmp = first;
-        Node tmp2 = first;
-
-
-        for (int i = 0; i < size; i++){
-            if (value == get(i)){
-                if (tmp == first){
-                    first = first.getNext();
-                }
-                else {
-                    tmp2.setNext(tmp.getNext());
-                }
-                this.size--;
-                return true;
-            }
-            else {
-                tmp2 = tmp;
-                tmp = tmp.getNext();
-            }
-        }
-        return false;
+    public int size()
+    {
+        return this.size;
     }
-
-    /**
-     * This method searches for the index of a node containing a given value
-     * @param value value to be searched for
-     * @return index of node containing given value
-     */
-    public int search(T value){
-        for (int i = 0; i < size; i++){
-            if (value == get(i)){
-                return i;
-            }
-        }
-        return 0;
-    }
-
-
-
 }

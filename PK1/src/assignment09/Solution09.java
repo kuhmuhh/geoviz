@@ -52,7 +52,7 @@ public class Solution09 {
      * @return taxes
      */
     public static double calculateTaxes(MyList<Currency> money){
-        double end = money.getSize();
+        double end = money.size();
         double value = 0;
 
         if (end >= 0){

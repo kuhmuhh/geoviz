@@ -54,27 +54,15 @@ public class Solution09 {
     public static double calculateTaxes(MyList<Currency> money){
         double end = money.size();
         double value = 0;
+        int i = 0;
 
-        if (end >= 0){
-            int i = 0;
-
-            if (end == 0){
-                Currency tmp = money.get(0);
-                return tmp.dollarValue() * 0.09;
-            }
-            else{
-                while (i < end){
-                    Currency tmp = money.get(i);
-                    value = value + tmp.dollarValue();
-                    i++;
-                    tmp = money.get(i);
-                }
-                return value * 0.09;
-            }
+        while (i < end){
+            Currency tmp = money.get(i);
+            value  += tmp.dollarValue();
+            i++;
         }
-        else {
-            return value;
+        return value * 0.09;
         }
     }
 
-}
+

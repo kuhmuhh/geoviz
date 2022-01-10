@@ -13,23 +13,12 @@ public class MyList<E>
     private int size = 0;
 
     /**
-     * (*12*)
-     * We also have to modify the add method because here the parameter needs
-     * to be more flexible. We cannot just store Strings but any kind of type.
-     * Therefore, we have to replace:
-     * 					String content
-     * with
-     * 					E content
-     *
-     * @param content - any object can be stored in our data structure
+     * This methods adds a new element to the list
+     * @param content content to be added
      */
     public void add(E content)
     {
         this.size++;
-        /*
-         * Again, we have to specify what kind of type the Node expects. It is
-         * the same type as the MyList data structure.
-         */
         Node<E> newNode = new Node<E>(content);
 
         if (this.first == null)
@@ -45,11 +34,9 @@ public class MyList<E>
     }
 
     /**
-     * What kind of type do we get from our data structure? Previously, it was
-     * just Strings. But now, since we are more flexible it is a type variable.
-     *
-     * @param i - the position in the data structure we are looking at
-     * @return - the object stored in the data structure
+     * This method returns the content of a given index
+     * @param i index
+     * @return element at given index
      */
     public E get(int i)
     {

@@ -6,7 +6,7 @@ package assignment09;
 public class Yen extends Currency{
 
     private static double rate;
-    private double dollar;
+
     private double yen;
 
     /**
@@ -23,14 +23,14 @@ public class Yen extends Currency{
      */
     @Override
     public double dollarValue() {
-        return rate * dollar;
+        return rate * yen;
     }
 
     /**
      * This method sets the rate for the conversion to USDollar
-     * @param rate rate in double
+     * @param newRate rate in double
      */
-    public static void setRate(double rate) {
-        rate = rate;
+    public static void setRate(double newRate) {
+        rate = newRate;
     }
 }

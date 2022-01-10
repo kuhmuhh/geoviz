@@ -20,7 +20,6 @@ public class Node<E>
 
     /**
      * This method sets the next node
-     *
      * @param next the next node
      */
     public void setNext(Node<E> next)
@@ -30,7 +29,6 @@ public class Node<E>
 
     /**
      * This method returns the next node
-     *
      * @return the next node
      */
     public Node<E> getNext()
@@ -40,7 +38,6 @@ public class Node<E>
 
     /**
      * This method gets the content of a node
-     *
      * @return the content stored in this node.
      */
     public E getContent()

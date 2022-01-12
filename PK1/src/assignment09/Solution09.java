@@ -19,14 +19,15 @@ public class Solution09 {
 
         MyString[] toSort = {b, a, d, e,f ,c , g};
 
-        System.out.println("Unsorted Array: \n");
+        System.out.print("Unsorted Array: \n");
         for (MyString s: toSort){
             System.out.println(s.toString() + " Length is: " + s.getLength() + ", Number of Vowels is: " + s.countVowels() + ", Value is: " + s.sumDecimal());
         }
 
         Arrays.sort(toSort, new MyStringComparator());
 
-        System.out.println("Sorted Array: \n");
+        System.out.println();
+        System.out.print("Sorted Array: \n");
         for (MyString s: toSort){
             System.out.println(s.toString() + " Length is: " + s.getLength() + ", Number of Vowels is: " + s.countVowels() + ", Value is: " + s.sumDecimal());
         }
@@ -41,8 +42,6 @@ public class Solution09 {
         money.add(new Pound(1000));
 
         System.out.println("Based on your money you have to pay: " + calculateTaxes(money) + " US-Dollar in taxes");
-
-
 
     }
 

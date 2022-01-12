@@ -1,0 +1,16 @@
+Assignment 8
+=============
+
+1: [ 3 / 3 ]
+Well done.
+For getLast ust return the result of the null check directly.
+Use lowerCamelCase for static fields. Only exception if shown in the tutorial is for constants, which have both modifiers static and final. You do not have constants here though.
+Number of satisfied guests seems a bit low though...
+
+2: [ 5 / 5 ]
+Well done.
+
+S: [ 2 / 2 ]
+Javadoc well done, but add it to fields and classes next time.
+
+T: [ 10 / 10 ]

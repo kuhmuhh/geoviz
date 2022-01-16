@@ -215,7 +215,7 @@ public class Utilities {
 
     public static double getDistance(MyPoint point1, MyPoint point2){
         double distance;
-        distance = Math.pow(((point1.getX()- point2.getX())*(point1.getX()- point2.getX())+(point1.getY()- point2.getY())*(point1.getY()- point2.getY()));
+        distance = Math.pow(((point1.getX()- point2.getX())*(point1.getX()- point2.getX())+(point1.getY()- point2.getY())*(point1.getY()- point2.getY())));
         return distance;
     }
 

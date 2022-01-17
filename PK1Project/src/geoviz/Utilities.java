@@ -1,5 +1,8 @@
 package geoviz;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class Utilities {
 
     /*
@@ -213,10 +216,128 @@ public class Utilities {
         System.out.println();
     }
 
-    public static double getDistance(MyPoint point1, MyPoint point2){
+    /**
+     * This method gets the distance between two MyPoints
+     * @param point1 point1
+     * @param point2 point1
+     * @return distance
+     */
+    public static double getDistance(MyPoint point1, MyPoint point2)
+    {
         double distance;
-        distance = Math.pow(((point1.getX()- point2.getX())*(point1.getX()- point2.getX())+(point1.getY()- point2.getY())*(point1.getY()- point2.getY())));
+        distance = Math.pow(((point1.getX()-point2.getX())*(point1.getX()-point2.getX())+(point1.getY()-point2.getY())*(point1.getY()-point2.getY())), 0.5);
         return distance;
+    }
+
+    /**
+     * This method gets the point of intersection between a line and a circle
+     * @param line1 line
+     * @param circle1 circle
+     * @return point of intersection
+     */
+    public static ArrayList <MyPoint> getPointOfIntersection(MyLine line1, MyCircle circle1)
+    {
+        //information from circle
+        double radius = circle1.getRadius();
+        MyPoint center = circle1.getCenter();
+
+        double xm = center.getX();
+        double ym  = center.getY();
+        double slope = line1.getSlope();
+        double dLine1 = line1.getIntercept();
+
+        double help;
+        help = radius*radius * (1+slope*slope) - ((ym-slope*xm-dLine1)*(ym-slope*xm-dLine1));
+
+        double x1;
+        x1=(xm + ym*slope - dLine1*slope - Math.sqrt(help))/(1+(slope*slope));
+        double y1;
+        y1 = line1.getSlope()*x1+line1.getIntercept();
+
+        double x2;
+        x2=(xm + ym*slope - dLine1*slope + Math.sqrt(help))/(1+(slope*slope));
+        double y2;
+        y2 = line1.getSlope()*x2+line1.getIntercept();
+
+        ArrayList<MyPoint> intersectionList = new ArrayList<>();
+
+        if(doubleComparison(help, 0))
+        {
+            MyPoint intercept1 = new MyPoint(x1, y1);
+            intersectionList.add(intercept1);
+            return intersectionList;
+        }
+        if(help > 0)
+        {
+            MyPoint intercept1 = new MyPoint(x1, y1);
+            MyPoint intercept2 = new MyPoint (x2, y2);
+            intersectionList.add(intercept1);
+            intersectionList.add(intercept2);
+            return intersectionList;
+        }
+        else
+        {
+            return intersectionList;
+        }
+
+    }
+
+    /**
+     * This method gets the point of intersection between two MyCircles
+     * @param circle1 circle 1
+     * @param circle2 circle 2
+     * @return point of intersection
+     */
+    public static ArrayList <MyPoint> getPointOfIntersection(MyCircle circle1, MyCircle circle2)
+    {
+
+        ArrayList<MyPoint> intersectionList = new ArrayList<>();
+
+        //circle 1
+        double a = circle1.getCenter().getX();
+        double b = circle1.getCenter().getY();
+        double r0 = circle1.getRadius();
+
+        //circle 2
+        double c = circle2.getCenter().getX();
+        double d = circle2.getCenter().getY();
+        double r1 = circle2.getRadius();
+
+        double distance = getDistance(circle1.getCenter(), circle2.getCenter());
+        double help;
+        help=0.25*Math.sqrt((distance+r0+r1)*(distance+r0-r1)*(distance-r0+r1)*(-distance+r0+r1));
+
+        double x1;
+        x1 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*distance*distance)+2*((b-d)/distance*distance)*help;
+        double y1;
+        y1 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*distance*distance))-2*((a-c)*distance*distance)*help;
+
+        double x2;
+        x2 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*distance*distance)-2*((b-d)/distance*distance)*help;
+        double y2;
+        y2 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*distance*distance))+2*((a-c)*distance*distance)*help;
+
+        if(doubleComparison(distance, (r0+r1)))
+        {
+            MyPoint intercept1 = new MyPoint(x1, y1);
+            intersectionList.add(intercept1);
+            return intersectionList;
+        }
+
+        if(distance < (r0+r1))
+        {
+            MyPoint intercept1 = new MyPoint(x1, y1);
+            MyPoint intercept2 = new MyPoint (x2, y2);
+            intersectionList.add(intercept1);
+            intersectionList.add(intercept2);
+            return intersectionList;
+        }
+
+        else
+        {
+            return intersectionList;
+        }
+
     }
 
 }

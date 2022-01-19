@@ -1,0 +1,9 @@
+Milestone 4
+=============
+
+Tasks 1 and 2 work perfectly fine, well done!
+Task 3 often leads to a wrong result, here are a few test cases for fixing your implementation:
+The points of intersection between MyCircle((-2.0,6.4),(1.0,7.9)) and MyCircle((-2.0,6.4),(1.2,8.1)) are [], not [(NaN,NaN)(NaN,NaN)]
+The points of intersection between MyCircle((0.0,0.0),(1.0,0.0)) and MyCircle((2.0,0.0),(0.5,0.0)) are [(0.6875,0.7261843774138906)(0.6875,-0.7261843774138906)], not [(0.6875,11.61895003862225)(0.6875,-11.61895003862225)]
+The points of intersection between MyLine((-1.929,-0.611),(0.239,1.718)) and MyCircle((0.889,-0.03),(-1.232,-0.664)) are [(0.6616366176280992,2.172022455007307)], not [(-1.3236438883332668,0.03931106276375518)(0.6616366176280992,2.172022455007307)]
+The points of intersection between MyCircle((-0.27,0.741),(-1.102,-1.47)) and MyCircle((2.0,0.0),(0.5,0.0)) are [(1.9672320506345662,1.4996420444540703)(1.0887616961001207,-1.1914884613397105)], not [(4.03250750867668,43.901884576993226)(-0.9765137619419932,-43.593730993878864)]

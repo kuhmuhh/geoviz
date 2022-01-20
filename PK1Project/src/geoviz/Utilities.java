@@ -3,6 +3,8 @@ package geoviz;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static java.lang.Double.NaN;
+
 public class Utilities {
 
     /*
@@ -250,14 +252,16 @@ public class Utilities {
         help = radius*radius * (1+slope*slope) - ((ym-slope*xm-dLine1)*(ym-slope*xm-dLine1));
 
         double x1;
-        x1=(xm + ym*slope - dLine1*slope - Math.sqrt(help))/(1+(slope*slope));
+        x1=(xm + ym*slope - dLine1*slope + Math.sqrt(help))/(1+(slope*slope));
         double y1;
-        y1 = line1.getSlope()*x1+line1.getIntercept();
+        //y1 = line1.getSlope()*x1+line1.getIntercept();
+        y1 = (dLine1 + xm*slope + ym*slope + slope*Math.sqrt(help))/(1+slope*slope);
 
         double x2;
-        x2=(xm + ym*slope - dLine1*slope + Math.sqrt(help))/(1+(slope*slope));
+        x2=(xm + ym*slope - dLine1*slope - Math.sqrt(help))/(1+(slope*slope));
         double y2;
-        y2 = line1.getSlope()*x2+line1.getIntercept();
+        //y2 = line1.getSlope()*x2+line1.getIntercept();
+        y2 = (dLine1 + xm*slope + ym*slope - slope*Math.sqrt(help))/(1+slope*slope);
 
         ArrayList<MyPoint> intersectionList = new ArrayList<>();
 
@@ -277,6 +281,10 @@ public class Utilities {
         }
         else
         {
+            MyPoint filler = new MyPoint(NaN, NaN);
+            MyPoint filler1 = new MyPoint(NaN, NaN);
+            intersectionList.add(filler);
+            intersectionList.add(filler1);
             return intersectionList;
         }
 
@@ -308,14 +316,14 @@ public class Utilities {
         help=0.25*Math.sqrt((distance+r0+r1)*(distance+r0-r1)*(distance-r0+r1)*(-distance+r0+r1));
 
         double x1;
-        x1 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*distance*distance)+2*((b-d)/distance*distance)*help;
+        x1 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*(distance*distance))+2*((b-d)/(distance*distance))*help;
         double y1;
-        y1 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*distance*distance))-2*((a-c)*distance*distance)*help;
+        y1 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*(distance*distance)))-2*((a-c)*(distance*distance))*help;
 
         double x2;
-        x2 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*distance*distance)-2*((b-d)/distance*distance)*help;
+        x2 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*(distance*distance))-2*((b-d)/distance*distance)*help;
         double y2;
-        y2 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*distance*distance))+2*((a-c)*distance*distance)*help;
+        y2 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*(distance*distance)))+2*((a-c)*(distance*distance))*help;
 
         if(doubleComparison(distance, (r0+r1)))
         {
@@ -335,6 +343,10 @@ public class Utilities {
 
         else
         {
+            MyPoint filler = new MyPoint(NaN, NaN);
+            MyPoint filler1 = new MyPoint(NaN, NaN);
+            intersectionList.add(filler);
+            intersectionList.add(filler1);
             return intersectionList;
         }
 

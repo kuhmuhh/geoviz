@@ -1,7 +1,6 @@
 package geoviz;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import static java.lang.Double.NaN;
 
@@ -240,7 +239,7 @@ public class Utilities {
     public static ArrayList <MyPoint> getPointOfIntersection(MyLine line1, MyCircle circle1)
     {
         //information from circle
-        double radius = circle1.getRadius();
+        double radius = circle1.getMyRadius();
         MyPoint center = circle1.getCenter();
 
         double xm = center.getX();
@@ -296,11 +295,8 @@ public class Utilities {
      * @param circle2 circle 2
      * @return point of intersection
      */
-    public static ArrayList <MyPoint> getPointOfIntersection(MyCircle circle1, MyCircle circle2)
+    public static ArrayList<MyPoint> getPointOfIntersection(MyCircle circle1, MyCircle circle2)
     {
-
-        ArrayList<MyPoint> intersectionList = new ArrayList<>();
-
         //circle 1
         double a = circle1.getCenter().getX();
         double b = circle1.getCenter().getY();
@@ -312,44 +308,85 @@ public class Utilities {
         double r1 = circle2.getRadius();
 
         double distance = getDistance(circle1.getCenter(), circle2.getCenter());
-        double help;
-        help=0.25*Math.sqrt((distance+r0+r1)*(distance+r0-r1)*(distance-r0+r1)*(-distance+r0+r1));
 
-        double x1;
-        x1 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*(distance*distance))+2*((b-d)/(distance*distance))*help;
-        double y1;
-        y1 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*(distance*distance)))-2*((a-c)*(distance*distance))*help;
+        ArrayList<MyPoint> intersectionList = new ArrayList<MyPoint>();
 
-        double x2;
-        x2 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*(distance*distance))-2*((b-d)/distance*distance)*help;
-        double y2;
-        y2 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*(distance*distance)))+2*((a-c)*(distance*distance))*help;
-
-        if(doubleComparison(distance, (r0+r1)))
+        // Intersecting circles and one circle is inside of another
+        if(distance< abs(r0-r1)||distance >(r0+r1))
         {
-            MyPoint intercept1 = new MyPoint(x1, y1);
-            intersectionList.add(intercept1);
+            return intersectionList;
+        }
+        // concentric circles
+        if((compareMyPoint(circle1.getCenter(), circle2.getCenter())==true) && r0!=r1)
+        {
             return intersectionList;
         }
 
-        if(distance < (r0+r1))
+        //inner circle tangency - 1 point
+        if(doubleComparison(distance, abs(r0-r1)))
         {
+            double x=((r1*(a-c))/(r0-r1))+c;
+            double y=((r1*(b-d))/(r1-r0))+d;
+
+            MyPoint intercept = new MyPoint(x, y);
+            intersectionList.add(intercept);
+            return intersectionList;
+        }
+        //Outer circle tangency - 1 point
+        if(doubleComparison(distance, (r0+r1)))
+        {
+            double x=((r1*(a-c))/(r0+r1))+c;
+            double y=((r1*(b-d))/(r1+r0))+d;
+
+            MyPoint intercept = new MyPoint(x, y);
+            intersectionList.add(intercept);
+            return intersectionList;
+        }
+        //intersecting circles - 2 points
+        if((abs(r0-r1)<distance && distance<(r0+r1))||(abs(r1-r0)<distance && distance<(r1+r0)))
+        {
+            double help;
+            help=(0.25)*Math.sqrt((distance+r0+r1)*(distance+r0-r1)*(distance-r0+r1)*(-distance+r0+r1));
+
+            double x1;
+            x1 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*distance*distance)+2*((b-d)/(distance*distance))*help;
+            double y1;
+            y1 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*distance*distance))-2*((a-c)/(distance*distance))*help;
+
+            double x2;
+            x2 = ((a+c)/2)+((c-a)*(r0*r0-r1*r1))/(2*distance*distance)-2*((b-d)/(distance*distance))*help;
+            double y2;
+            y2 = ((b+d)/2)+(((d-b)*(r0*r0-r1*r1))/(2*distance*distance))+2*((a-c)/(distance*distance))*help;
+
             MyPoint intercept1 = new MyPoint(x1, y1);
             MyPoint intercept2 = new MyPoint (x2, y2);
             intersectionList.add(intercept1);
             intersectionList.add(intercept2);
             return intersectionList;
         }
-
         else
         {
-            MyPoint filler = new MyPoint(NaN, NaN);
-            MyPoint filler1 = new MyPoint(NaN, NaN);
-            intersectionList.add(filler);
-            intersectionList.add(filler1);
             return intersectionList;
         }
-
     }
+
+    /**
+     * This method checks whether two MyPoints are equal
+     * @param point1 point1
+     * @param point2 point2
+     * @return true or false
+     */
+    public static boolean compareMyPoint(MyPoint point1, MyPoint point2)
+    {
+        if(doubleComparison(point1.getX(), point2.getX()) && doubleComparison(point1.getY(), point2.getY()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 }

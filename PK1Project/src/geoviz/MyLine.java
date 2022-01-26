@@ -1,6 +1,8 @@
 package geoviz;
 
-public class MyLine {
+import javafx.scene.shape.Line;
+
+public class MyLine extends Line {
 
     private double slope;
     private double intercept;

@@ -1,6 +1,8 @@
 package geoviz;
 
-public class MyCircle
+import javafx.scene.shape.Circle;
+
+public class MyCircle extends Circle
 {
     private double radius;
     private MyPoint center;
@@ -29,7 +31,7 @@ public class MyCircle
      * This method gets the radius of the circle
      * @return radius
      */
-    public double getRadius()
+    public double getMyRadius()
     {
         return radius;
     }
@@ -47,7 +49,7 @@ public class MyCircle
      * This method sets the radius of a circle
      * @param radius radius
      */
-    public void setRadius(double radius)
+    public void setMyRadius(double radius)
     {
         this.radius = radius;
     }

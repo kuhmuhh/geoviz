@@ -317,7 +317,7 @@ public class Utilities {
             return intersectionList;
         }
         // concentric circles
-        if((compareMyPoint(circle1.getCenter(), circle2.getCenter())==true) && r0!=r1)
+        if((compareMyPoint(circle1.getCenter(), circle2.getCenter())==true) && !doubleComparison(r0, r1))
         {
             return intersectionList;
         }

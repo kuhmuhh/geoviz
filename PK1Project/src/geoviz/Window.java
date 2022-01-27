@@ -124,17 +124,14 @@ public class Window extends Application {
     public static void addPoint(MyPoint point){
         Circle circle = new Circle(point.getX(), point.getY(), 5);
         pane.getChildren().add(circle);
-        return;
     }
 
     public static void addLine(MyPoint point1, MyPoint point2){
         Line line = new Line(point1.getX(), point1.getY(), point2.getX(), point2.getY());
         pane.getChildren().add(line);
-        return;
     }
 
     public static void addCircle(MyPoint point1, MyPoint point2){
         Circle circle = new Circle();
     }
-
 }

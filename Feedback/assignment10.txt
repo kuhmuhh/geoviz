@@ -1,0 +1,10 @@
+Assignment 10
+=============
+
+1: [ 8 / 8 ]
+Well done.
+
+S: [ 2 / 2 ]
+Great style, do not forget to add javadoc to fields though!
+
+T: [ 10 / 10 ]

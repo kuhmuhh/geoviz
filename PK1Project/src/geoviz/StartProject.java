@@ -55,7 +55,9 @@ public class StartProject {
                 Utilities.getPointOfIntersection(circle2, circle).get(1).getX() +
                 " " +
                 Utilities.getPointOfIntersection(circle2, circle).get(1).getY());
-        */
+
+
+         */
 
         Application.launch(Window.class);
     }

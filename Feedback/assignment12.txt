@@ -1,0 +1,12 @@
+Assignment 12
+=============
+
+1: [ 3 / 8 ]
+Line is unfinished.
+You do not need to extend circle if you are not adding any functionality to it.
+Be careful with using static fields instead of instance fields in your windows class. In this task there is not much of a difference functionality wise, but you can quickly run into issue with values changing accross all instances when they should not. If you need easy access to those fields from somewhere, rather think about making the whole instance accessible instead of individual fields (e.g. a singleton instance).
+
+S: [ 1 / 2 ]
+Code style is good, but no javadoc at all unfortunately.
+
+T: [ 4 / 10 ]

@@ -20,22 +20,38 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
 
+/**
+ * This class is used for displaying and handling of the application TODO
+ */
 public class Window extends Application {
 
+    /**
+     * This field represents a BorderPane used for displaying the grid and points, lines, circles and intersectionpoints
+     */
     private static BorderPane pane;
-    private static Label showIt;
+    /**
+     * This field represents a radiobutton to draw a line
+     */
     private static RadioButton radioButton1;
+    /**
+     * This field represents a radiobutton to draw a circle
+     */
     private static RadioButton radioButton2;
+    /**
+     * This field represents a color to be picked using the colorpicker
+     */
     private static Color color;
-    private static CheckBox checkBox;
+    /**
+     * This field is used for checking whether the fill checkbox is select or not
+     */
     private static boolean isFillSelected;
     private static ArrayList<MyPoint> list = new ArrayList<>();
     private static Stack<MyPoint> stack = new Stack<>();
 
-    public void init() {
-
-    }
-
+    /**
+     * This method is used for the layout of the application
+     * @param primaryStage primaryStage
+     */
     public void start(Stage primaryStage) {
 
         Label showIt = new Label();
@@ -124,6 +140,10 @@ public class Window extends Application {
 
     }
 
+    /**
+     * TODO
+     * @return
+     */
     private BorderPane pane() {
         BorderPane root = new BorderPane();
         for (int i = 0; i < 1000; i++) {
@@ -147,15 +167,10 @@ public class Window extends Application {
         return root;
     }
 
-    public static void addGeometry() {
-        if (radioButton1.isSelected()) {
-            addLine();
-        }
-        if (radioButton2.isSelected()) {
-            //addCircle(point1, point2);
-        }
-    }
-
+    /**
+     * This method creates a MyPoint instance and draws a point on the pane where it has been clicked
+     * @param point point
+     */
     public static void addPoint(MyPoint point) {
         if (!isPointInList(point)) {
             Circle circle = new Circle(point.getX(), point.getY(), 5);
@@ -175,6 +190,11 @@ public class Window extends Application {
         else {}
     }
 
+    /**
+     * This method checks whether the point has been added to the list
+     * @param point point to be checked
+     * @return true or false
+     */
     public static boolean isPointInList(MyPoint point){
         for (int i = 0; i < list.size() ; i++) {
             if (Objects.equals(list.get(i),point)){
@@ -184,6 +204,9 @@ public class Window extends Application {
         return false;
     }
 
+    /**
+     * This method creates a MyLine instance and draws a line on the pane
+     */
     public static void addLine() {
         if (stack.size() == 2) {
             MyPoint stackPoint1 = stack.peek();
@@ -201,8 +224,10 @@ public class Window extends Application {
         }
     }
 
+    /**
+     * This method creates a MyCircle instance and draws a circle on the pane
+     */
     public static void addCircle() {
-        //Circle circle = new Circle();
         if (stack.size() == 2) {
             MyPoint stackPoint1 = stack.peek();
             stack.pop();
@@ -225,6 +250,9 @@ public class Window extends Application {
         }
     }
 
+    /**
+     * This method clears the screen of points, lines, circles and intersectionpoints
+     */
     public static void clearScreen() {
         pane.getChildren().remove(2002, pane.getChildren().size());
         stack.clear();

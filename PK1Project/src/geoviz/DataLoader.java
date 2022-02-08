@@ -4,8 +4,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This Class loads data from a comma separated file into an ArrayList containing MyPoint instances
+ */
 public class DataLoader {
 
+    /**
+     * This Method loads data from a comma separated file into an ArrayList containing MyPoint instances
+     * @return ArrayList containing MyPoint instances
+     */
     public static ArrayList<MyPoint> readData() {
 
         BufferedReader in;

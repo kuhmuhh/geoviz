@@ -3,20 +3,16 @@ package geoviz;
 import javafx.scene.shape.Circle;
 
 /**
- * Represents circle
- *
+ *  This Method represents a circle
  */
 public class MyCircle extends Circle {
-
-    
-
-
-
-
-
-
-
+    /**
+     * This field represents the radius of a circle
+     */
     private double radius;
+    /**
+     * This field represents the center point of a circle
+     */
     private MyPoint center;
 
     /**

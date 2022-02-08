@@ -6,19 +6,6 @@ import static java.lang.Double.NaN;
 
 public class Utilities {
 
-    /*
-    public static void main(String[] args) {
-
-        double[][] points = {{1,1},{2,2},{1,2},{2,1}};
-
-        System.out.println(round2(2.046234183));
-        System.out.println(getIntercept(3,1,-1,5));
-        System.out.println(isParallel(0.3,0.5));
-        System.out.println(isOrthogonal(0.1,-10));
-        printArray(getPointOfIntersection(points[0],points[1],points[2],points[3]));
-    }
-    */
-
     /**
      * This method detects if two double values are equal
      *

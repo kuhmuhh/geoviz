@@ -2,6 +2,9 @@ package geoviz;
 
 import javafx.application.Application;
 
+/**
+ * This class starts the application
+ */
 public class StartProject {
 
     public static void main(String[] args) {

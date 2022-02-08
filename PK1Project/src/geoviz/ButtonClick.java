@@ -11,11 +11,11 @@ public class ButtonClick implements EventHandler<ActionEvent> {
 
     private Label showIt;
 
-    public ButtonClick(Label showIt){
+    public ButtonClick(Label showIt) {
         this.showIt = showIt;
     }
 
-    public void handle(ActionEvent event){
+    public void handle(ActionEvent event) {
         showIt.setText("Hello World");
     }
 

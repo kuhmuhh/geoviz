@@ -58,7 +58,6 @@ public class StartProject {
 
 
          */
-
         Application.launch(Window.class);
     }
 

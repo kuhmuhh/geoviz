@@ -268,11 +268,12 @@ public class Utilities {
             intersectionList.add(intercept2);
             return intersectionList;
         } else {
-            MyPoint filler = new MyPoint(NaN, NaN);
-            MyPoint filler1 = new MyPoint(NaN, NaN);
-            intersectionList.add(filler);
-            intersectionList.add(filler1);
-            return intersectionList;
+            //MyPoint filler = new MyPoint(NaN, NaN);
+            //MyPoint filler1 = new MyPoint(NaN, NaN);
+            //intersectionList.add(filler);
+            //intersectionList.add(filler1);
+            //return intersectionList;
+            return null;
         }
 
     }
@@ -285,39 +286,28 @@ public class Utilities {
      * @return point of intersection
      */
     public static ArrayList<MyPoint> getPointOfIntersection(MyCircle circle1, MyCircle circle2) {
+        ArrayList<MyPoint> intersectionList = new ArrayList<>();
+
         //circle 1
         double a = circle1.getCenter().getX();
         double b = circle1.getCenter().getY();
-        double r0 = circle1.getRadius();
+        double r0 = circle1.getMyRadius();
 
         //circle 2
         double c = circle2.getCenter().getX();
         double d = circle2.getCenter().getY();
-        double r1 = circle2.getRadius();
+        double r1 = circle2.getMyRadius();
 
         double distance = getDistance(circle1.getCenter(), circle2.getCenter());
 
-        ArrayList<MyPoint> intersectionList = new ArrayList<MyPoint>();
-
-        // Intersecting circles and one circle is inside of another
-        if (distance < abs(r0 - r1) || distance > (r0 + r1)) {
-            return intersectionList;
-        }
-        // concentric circles
-        if ((compareMyPoint(circle1.getCenter(), circle2.getCenter())) && doubleComparison(r0, r1)) {
-            return intersectionList;
-        }
-
-        //inner circle tangency - 1 point
         if (doubleComparison(distance, abs(r0 - r1))) {
-            double x = ((r1 * (a - c)) / (r0 - r1)) + c;
-            double y = ((r1 * (b - d)) / (r1 - r0)) + d;
+            //double x = ((r1 * (a - c)) / (r0 - r1)) + c;
+            //double y = ((r1 * (b - d)) / (r1 - r0)) + d;
 
-            MyPoint intercept = new MyPoint(x, y);
-            intersectionList.add(intercept);
-            return intersectionList;
+            //MyPoint intercept = new MyPoint(x, y);
+            //intersectionList.add(intercept);
+            return null;
         }
-        //Outer circle tangency - 1 point
         if (doubleComparison(distance, (r0 + r1))) {
             double x = ((r1 * (a - c)) / (r0 + r1)) + c;
             double y = ((r1 * (b - d)) / (r1 + r0)) + d;
@@ -326,7 +316,6 @@ public class Utilities {
             intersectionList.add(intercept);
             return intersectionList;
         }
-        //intersecting circles - 2 points
         if ((abs(r0 - r1) < distance && distance < (r0 + r1)) || (abs(r1 - r0) < distance && distance < (r1 + r0))) {
             double help;
             help = (0.25) * Math.sqrt((distance + r0 + r1) * (distance + r0 - r1) * (distance - r0 + r1) * (-distance + r0 + r1));
@@ -346,9 +335,22 @@ public class Utilities {
             intersectionList.add(intercept1);
             intersectionList.add(intercept2);
             return intersectionList;
-        } else {
+        }
+        if (distance < abs(r0 - r1) || distance > (r0 + r1)) {
+            double x = ((r1 * (a - c)) / (r0 - r1)) + c;
+            double y = ((r1 * (b - d)) / (r1 - r0)) + d;
+
+            MyPoint intercept = new MyPoint(x, y);
+            intersectionList.add(intercept);
             return intersectionList;
         }
+        if ((compareMyPoint(circle1.getCenter(), circle2.getCenter())) && doubleComparison(r0, r1)) {
+            return null;
+        } else {
+            return null;
+        }
+
+
     }
 
     /**

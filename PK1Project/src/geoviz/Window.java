@@ -45,7 +45,25 @@ public class Window extends Application {
      * This field is used for checking whether the fill checkbox is select or not
      */
     private static boolean isFillSelected;
+    /**
+     * This field stores MyPoints in an ArrayList to check whether a point is already on the pane
+     */
     private static ArrayList<MyPoint> list = new ArrayList<>();
+    /**
+     * This field stores MyLines in an ArrayList
+     */
+    private static ArrayList<MyLine> lineList = new ArrayList<>();
+    /**
+     * This field stores MyCircles in an ArrayList
+     */
+    private static ArrayList<MyCircle> circleList = new ArrayList<>();
+    /**
+     * This field stores intersection as MyPoints in an ArrayList
+     */
+    private static ArrayList<MyPoint> intersectionList = new ArrayList<>();
+    /**
+     * This field stores two MyPoint instances in a stack to either draw a line or a circle
+     */
     private static Stack<MyPoint> stack = new Stack<>();
 
     /**
@@ -103,7 +121,7 @@ public class Window extends Application {
         BorderPane pane = pane();
         this.pane = pane;
 
-        Scene scene = new Scene(pane, 500, 400);
+        Scene scene = new Scene(pane, 800, 800);
 
         pane.setTop(root);
         pane.setBottom(vBox2);
@@ -127,21 +145,26 @@ public class Window extends Application {
         {
             ArrayList<MyPoint> data = new ArrayList<>();
             data = DataLoader.readData();
-            for (int i = 0; i < data.size()  ; i++) {
+            for (int i = 0; i < data.size(); i++) {
                 addPoint(data.get(i));
             }
         });
 
         checkBox.setOnAction(event ->
         {
-            isFillSelected =! isFillSelected;
+            isFillSelected = !isFillSelected;
         });
 
+        buttonIntersection.setOnAction(event ->
+        {
+            calcIntersections();
+        });
 
     }
 
     /**
      * TODO
+     *
      * @return
      */
     private BorderPane pane() {
@@ -186,8 +209,8 @@ public class Window extends Application {
             pane.getChildren().add(circle);
             Tooltip.install(circle, new Tooltip("x: " + circle.getCenterX() + " ; y: " + circle.getCenterY()));
             list.add(point);
+        } else {
         }
-        else {}
     }
 
     /**
@@ -195,9 +218,9 @@ public class Window extends Application {
      * @param point point to be checked
      * @return true or false
      */
-    public static boolean isPointInList(MyPoint point){
-        for (int i = 0; i < list.size() ; i++) {
-            if (Objects.equals(list.get(i),point)){
+    public static boolean isPointInList(MyPoint point) {
+        for (int i = 0; i < list.size(); i++) {
+            if (Objects.equals(list.get(i), point)) {
                 return true;
             }
         }
@@ -221,6 +244,7 @@ public class Window extends Application {
             line.setStroke(color);
             line.setStrokeWidth(2.5);
             pane.getChildren().add(line);
+            lineList.add(lineCalc);
         }
     }
 
@@ -238,15 +262,15 @@ public class Window extends Application {
             double radius = Utilities.getDistance(stackPoint1, stackPoint2);
             Circle circle = new Circle(stackPoint1.getX(), stackPoint1.getY(), radius);
             Tooltip.install(circle, new Tooltip("CenterX: " + center.getX() + " CenterY: " + center.getY() + " Radius: " + radius));
-            if (isFillSelected){
+            if (isFillSelected) {
                 circle.setFill(color);
-            }
-            else {
+            } else {
                 circle.setFill(null);
             }
             circle.setStroke(color);
             circle.setStrokeWidth(2.5);
             pane.getChildren().add(circle);
+            circleList.add(circleCalc);
         }
     }
 
@@ -256,6 +280,57 @@ public class Window extends Application {
     public static void clearScreen() {
         pane.getChildren().remove(2002, pane.getChildren().size());
         stack.clear();
+        lineList.clear();
+        circleList.clear();
+        intersectionList.clear();
+        list.clear();
+    }
+
+    /**
+     * This method calculates the Intersections between lines and line, circles and circles and lines and circles and creates the points on the intersection
+     */
+    public static void calcIntersections() {
+        //line line
+        for (int i = 0; i < lineList.size(); i++) {
+            for (int j = 0; j < lineList.size(); j++) {
+                if (Utilities.getPointOfIntersection(lineList.get(i), lineList.get(j)) != null) {
+                    MyPoint intersectionLine = new MyPoint(Utilities.getPointOfIntersection(lineList.get(i), lineList.get(j)).getX(), Utilities.getPointOfIntersection(lineList.get(i), lineList.get(j)).getY());
+                    intersectionList.add(intersectionLine);
+                    //addPoint(intersectionLine);
+                }
+            }
+        }
+        //circle circle
+        for (int i = 0; i < circleList.size(); i++) {
+            for (int j = 0; j < circleList.size(); j++) {
+                if (Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)) != null) {
+                    int x = 0;
+                    System.out.println(circleList.size());
+                    MyPoint intersectionCircle = new MyPoint(Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).get(0).getX(), Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).get(0).getY());
+                    intersectionList.add(intersectionCircle);
+                    x++;
+                    //addPoint(intersectionCircle);
+                }
+            }
+        }
+
+        //circle line
+        for (int i = 0; i < circleList.size(); i++) {
+            for (int j = 0; j < lineList.size(); j++) {
+                if (Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)) != null) {
+                    int y = 0;
+                    MyPoint intersectionLineCircle = new MyPoint(Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).get(0).getX(), Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).get(0).getY());
+                    intersectionList.add(intersectionLineCircle);
+                    //addPoint(intersectionLineCircle);
+                    y++;
+                }
+            }
+        }
+
+        //adding intersections to pane
+        for (int i = 0; i < intersectionList.size(); i++) {
+            addPoint(intersectionList.get(i));
+        }
     }
 
 }

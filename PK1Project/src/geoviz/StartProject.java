@@ -23,44 +23,20 @@ public class StartProject {
          */
 
         /*
-        MyPoint[] points = { new MyPoint(1, 1), new MyPoint(2, 2), new MyPoint(1, 1), new MyPoint(1, 2) };
-        MyLine line1 = new MyLine(points[0], points[1]);
-        MyCircle circle = new MyCircle(points[2], points[3]);
-        MyCircle circle2 = new MyCircle(points[3], points[1]);
-        //MyPoint[] points = { new MyPoint(-0.27, 0.741), new MyPoint(-1.102, -1.47), new MyPoint(2.0, 0.0), new MyPoint(0.5, 0.0)};
-        //MyCircle circle = new MyCircle(points[0], points[1]);
-        //MyCircle circle2 = new MyCircle(points[2], points[3]);
-        //MyLine line1 = new MyLine(points[2], points[3]);
+        //MyPoint[] points = { new MyPoint(1, 1), new MyPoint(2, 2), new MyPoint(1, 1), new MyPoint(1, 2) };
+        //MyLine line1 = new MyLine(points[0], points[1]);
+        //MyCircle circle = new MyCircle(points[2], points[3]);
+        //MyCircle circle2 = new MyCircle(points[3], points[1]);
+        MyPoint[] points = { new MyPoint(0.889, -0.03), new MyPoint(-1.232, -0.664), new MyPoint(-1.929, -0.611), new MyPoint(0.239, 1.718)};
+        MyCircle circle = new MyCircle(points[0], points[1]);
+        MyCircle circle2 = new MyCircle(points[2], points[3]);
+        MyLine line1 = new MyLine(points[2], points[3]);
         System.out.println("Intersection point1: " + Utilities.getPointOfIntersection(line1, circle).get(0).getX() + " " + Utilities.getPointOfIntersection(line1, circle).get(0).getY());
         System.out.println("Intersection point2: " + Utilities.getPointOfIntersection(line1, circle).get(1).getX() + " " + Utilities.getPointOfIntersection(line1, circle).get(1).getY());
         System.out.println("Intersection point3: " + Utilities.getPointOfIntersection(circle2, circle).get(0).getX() + " " + Utilities.getPointOfIntersection(circle2, circle).get(0).getY());
         System.out.println("Intersection point4: " + Utilities.getPointOfIntersection(circle2, circle).get(1).getX() + " " + Utilities.getPointOfIntersection(circle2, circle).get(1).getY());
-        */
-
-        /*
-        MyPoint[] points = {
-                new MyPoint(1, 1), new MyPoint(2, 2),
-                new MyPoint(1, 1), new MyPoint(1, 2) };
-        MyLine line1 = new MyLine(points[0], points[1]);
-        MyCircle circle = new MyCircle(points[2], points[3]);
-        MyCircle circle2 = new MyCircle(points[3], points[1]);
-        System.out.println("Intersection point1: " +
-                        Utilities.getPointOfIntersection(line1, circle).get(0).getX() + " "
-                        + Utilities.getPointOfIntersection(line1, circle).get(0).getY());
-        System.out.println("Intersection point2: " +
-                        Utilities.getPointOfIntersection(line1, circle).get(1).getX() + " "
-                        + Utilities.getPointOfIntersection(line1, circle).get(1).getY());
-        System.out.println("Intersection point3: " +
-                Utilities.getPointOfIntersection(circle2, circle).get(0).getX() +
-                " " +
-                Utilities.getPointOfIntersection(circle2, circle).get(0).getY());
-        System.out.println("Intersection point4: " +
-                Utilities.getPointOfIntersection(circle2, circle).get(1).getX() +
-                " " +
-                Utilities.getPointOfIntersection(circle2, circle).get(1).getY());
-
-
          */
+
         Application.launch(Window.class);
     }
 

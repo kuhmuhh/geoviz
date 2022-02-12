@@ -10,7 +10,7 @@ import javafx.scene.shape.Circle;
  */
 public class MouseClick implements EventHandler<MouseEvent> {
     /**
-     * ? TODO
+     * showIt label
      */
     private Label showIt;
 

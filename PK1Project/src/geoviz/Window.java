@@ -1,11 +1,10 @@
 package geoviz;
 
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -13,15 +12,12 @@ import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
-import javax.tools.Tool;
-import java.beans.EventHandler;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
 
 /**
- * This class is used for displaying and handling of the application TODO
+ * This class is used for displaying and handling the application
  */
 public class Window extends Application {
 
@@ -32,11 +28,11 @@ public class Window extends Application {
     /**
      * This field represents a radiobutton to draw a line
      */
-    private static RadioButton radioButton1;
+    private static RadioButton radioButtonLine;
     /**
      * This field represents a radiobutton to draw a circle
      */
-    private static RadioButton radioButton2;
+    private static RadioButton radioButtonCircle;
     /**
      * This field represents a color to be picked using the colorpicker
      */
@@ -64,10 +60,15 @@ public class Window extends Application {
     /**
      * This field stores two MyPoint instances in a stack to either draw a line or a circle
      */
-    private static Stack<MyPoint> stack = new Stack<>();
+    private static Stack<MyPoint> stackDraw = new Stack<>();
+    /**
+     * This field stores a group for intersection points
+     */
+    private static Group intersectionGroup = new Group();
 
     /**
      * This method is used for the layout of the application
+     *
      * @param primaryStage primaryStage
      */
     public void start(Stage primaryStage) {
@@ -75,47 +76,47 @@ public class Window extends Application {
         Label showIt = new Label();
 
         //Top Toolbar
-        ToolBar toolBar1 = new ToolBar();
+        ToolBar toolBarTop = new ToolBar();
 
         RadioButton radioButtonLine = new RadioButton("Line");
-        Window.radioButton1 = radioButtonLine;
+        Window.radioButtonLine = radioButtonLine;
         radioButtonLine.setSelected(true);
-        toolBar1.getItems().add(radioButtonLine);
-        toolBar1.getItems().add(new Separator());
+        toolBarTop.getItems().add(radioButtonLine);
+        toolBarTop.getItems().add(new Separator());
         RadioButton radioButtonCircle = new RadioButton("Circle");
-        Window.radioButton2 = radioButtonCircle;
-        toolBar1.getItems().add(radioButtonCircle);
-        toolBar1.getItems().add(new Separator());
+        Window.radioButtonCircle = radioButtonCircle;
+        toolBarTop.getItems().add(radioButtonCircle);
+        toolBarTop.getItems().add(new Separator());
         ToggleGroup toggleGroup = new ToggleGroup();
         radioButtonLine.setToggleGroup(toggleGroup);
         radioButtonCircle.setToggleGroup(toggleGroup);
 
-        CheckBox checkBox = new CheckBox("Fill");
-        toolBar1.getItems().add(checkBox);
-        toolBar1.getItems().add(new Separator());
+        CheckBox checkBoxFill = new CheckBox("Fill");
+        toolBarTop.getItems().add(checkBoxFill);
+        toolBarTop.getItems().add(new Separator());
 
-        Button buttonIntersection = new Button("Show Intersection");
-        toolBar1.getItems().add(buttonIntersection);
-        toolBar1.getItems().add(new Separator());
+        Button buttonIntersection = new Button("Show Intersection(s)");
+        toolBarTop.getItems().add(buttonIntersection);
+        toolBarTop.getItems().add(new Separator());
 
         ColorPicker colorPicker = new ColorPicker();
         color = Color.BLACK;
         colorPicker.setValue(Color.BLACK);
-        toolBar1.getItems().add(colorPicker);
+        toolBarTop.getItems().add(colorPicker);
 
-        BorderPane root = new BorderPane(toolBar1);
+        BorderPane topBar = new BorderPane(toolBarTop);
 
         //Bottom Toolbar
-        ToolBar toolBar2 = new ToolBar();
+        ToolBar toolBarBottom = new ToolBar();
 
-        Button button2 = new Button("Load Data");
-        toolBar2.getItems().add(button2);
-        toolBar2.getItems().add(new Separator());
+        Button buttonData = new Button("Load Data");
+        toolBarBottom.getItems().add(buttonData);
+        toolBarBottom.getItems().add(new Separator());
 
-        Button button3 = new Button("Clear Screen");
-        toolBar2.getItems().add(button3);
+        Button buttonClear = new Button("Clear Screen");
+        toolBarBottom.getItems().add(buttonClear);
 
-        BorderPane vBox2 = new BorderPane(toolBar2);
+        BorderPane bottomBar = new BorderPane(toolBarBottom);
 
         //Layout
         BorderPane pane = pane();
@@ -123,8 +124,8 @@ public class Window extends Application {
 
         Scene scene = new Scene(pane, 800, 800);
 
-        pane.setTop(root);
-        pane.setBottom(vBox2);
+        pane.setTop(topBar);
+        pane.setBottom(bottomBar);
         primaryStage.setTitle("PK1 - Project");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -136,12 +137,12 @@ public class Window extends Application {
             color = colorPicker.getValue();
         });
 
-        button3.setOnAction(event ->
+        buttonClear.setOnAction(event ->
         {
             clearScreen();
         });
 
-        button2.setOnAction(event ->
+        buttonData.setOnAction(event ->
         {
             ArrayList<MyPoint> data = new ArrayList<>();
             data = DataLoader.readData();
@@ -150,22 +151,28 @@ public class Window extends Application {
             }
         });
 
-        checkBox.setOnAction(event ->
+        checkBoxFill.setOnAction(event ->
         {
             isFillSelected = !isFillSelected;
         });
 
         buttonIntersection.setOnAction(event ->
         {
-            calcIntersections();
+            if (Objects.equals(buttonIntersection.getText(), "Show Intersection(s)")) {
+                calcIntersections();
+                buttonIntersection.setText("Hide Intersections(s)");
+            } else if (Objects.equals(buttonIntersection.getText(), "Hide Intersections(s)")) {
+                buttonIntersection.setText("Show Intersection(s)");
+                clearIntersection();
+            }
+
         });
 
     }
 
     /**
-     * TODO
-     *
-     * @return
+     * The grid is being drawn onto the pane
+     * @return pane with grid
      */
     private BorderPane pane() {
         BorderPane root = new BorderPane();
@@ -192,6 +199,7 @@ public class Window extends Application {
 
     /**
      * This method creates a MyPoint instance and draws a point on the pane where it has been clicked
+     *
      * @param point point
      */
     public static void addPoint(MyPoint point) {
@@ -199,10 +207,10 @@ public class Window extends Application {
             Circle circle = new Circle(point.getX(), point.getY(), 5);
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 System.out.println("click");
-                stack.push(point);
-                if (radioButton1.isSelected())
+                stackDraw.push(point);
+                if (radioButtonLine.isSelected())
                     addLine();
-                if (radioButton2.isSelected()) {
+                if (radioButtonCircle.isSelected()) {
                     addCircle();
                 }
             });
@@ -214,7 +222,35 @@ public class Window extends Application {
     }
 
     /**
+     * This method is used for creating intersection points
+     *
+     * @param point intersection point
+     */
+    public static void addPointIntersection(MyPoint point) {
+        if (!isPointInList(point)) {
+            Circle circle = new Circle(point.getX(), point.getY(), 5);
+            circle.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("click");
+                stackDraw.push(point);
+                if (radioButtonLine.isSelected())
+                    addLine();
+                if (radioButtonCircle.isSelected()) {
+                    addCircle();
+                }
+            });
+            pane.getChildren().add(circle);
+            intersectionGroup.getChildren().add(circle);
+            circle.setStroke(Color.RED);
+            circle.setFill(Color.RED);
+            Tooltip.install(circle, new Tooltip("x: " + circle.getCenterX() + " ; y: " + circle.getCenterY()));
+            list.add(point);
+        } else {
+        }
+    }
+
+    /**
      * This method checks whether the point has been added to the list
+     *
      * @param point point to be checked
      * @return true or false
      */
@@ -231,11 +267,11 @@ public class Window extends Application {
      * This method creates a MyLine instance and draws a line on the pane
      */
     public static void addLine() {
-        if (stack.size() == 2) {
-            MyPoint stackPoint1 = stack.peek();
-            stack.pop();
-            MyPoint stackPoint2 = stack.peek();
-            stack.pop();
+        if (stackDraw.size() == 2) {
+            MyPoint stackPoint1 = stackDraw.peek();
+            stackDraw.pop();
+            MyPoint stackPoint2 = stackDraw.peek();
+            stackDraw.pop();
             MyLine lineCalc = new MyLine(stackPoint1, stackPoint2);
             double slope = Utilities.getSlope(stackPoint1.getX(), stackPoint1.getY(), stackPoint2.getX(), stackPoint2.getY());
             double looong = slope * 10000 + Utilities.getIntercept(stackPoint1.getX(), stackPoint1.getY(), stackPoint2.getX(), stackPoint2.getY());
@@ -252,11 +288,11 @@ public class Window extends Application {
      * This method creates a MyCircle instance and draws a circle on the pane
      */
     public static void addCircle() {
-        if (stack.size() == 2) {
-            MyPoint stackPoint1 = stack.peek();
-            stack.pop();
-            MyPoint stackPoint2 = stack.peek();
-            stack.pop();
+        if (stackDraw.size() == 2) {
+            MyPoint stackPoint1 = stackDraw.peek();
+            stackDraw.pop();
+            MyPoint stackPoint2 = stackDraw.peek();
+            stackDraw.pop();
             MyCircle circleCalc = new MyCircle(stackPoint1, stackPoint2);
             MyPoint center = circleCalc.getCenter();
             double radius = Utilities.getDistance(stackPoint1, stackPoint2);
@@ -279,57 +315,67 @@ public class Window extends Application {
      */
     public static void clearScreen() {
         pane.getChildren().remove(2002, pane.getChildren().size());
-        stack.clear();
+        stackDraw.clear();
         lineList.clear();
         circleList.clear();
         intersectionList.clear();
         list.clear();
+        intersectionGroup.getChildren().clear();
     }
 
     /**
      * This method calculates the Intersections between lines and line, circles and circles and lines and circles and creates the points on the intersection
      */
     public static void calcIntersections() {
-        //line line
+        pane.getChildren().add(intersectionGroup);
+
         for (int i = 0; i < lineList.size(); i++) {
             for (int j = 0; j < lineList.size(); j++) {
                 if (Utilities.getPointOfIntersection(lineList.get(i), lineList.get(j)) != null) {
                     MyPoint intersectionLine = new MyPoint(Utilities.getPointOfIntersection(lineList.get(i), lineList.get(j)).getX(), Utilities.getPointOfIntersection(lineList.get(i), lineList.get(j)).getY());
                     intersectionList.add(intersectionLine);
-                    //addPoint(intersectionLine);
+                    intersectionGroup.getChildren().add(intersectionLine);
+                    addPointIntersection(intersectionLine);
                 }
             }
         }
-        //circle circle
+
         for (int i = 0; i < circleList.size(); i++) {
             for (int j = 0; j < circleList.size(); j++) {
-                if (Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)) != null) {
-                    int x = 0;
+                if (Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).size() != 0) {
                     System.out.println(circleList.size());
-                    MyPoint intersectionCircle = new MyPoint(Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).get(0).getX(), Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).get(0).getY());
-                    intersectionList.add(intersectionCircle);
-                    x++;
-                    //addPoint(intersectionCircle);
+                    for (int k = 0; k < Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).size(); k++) {
+                        MyPoint intersectionCircle = new MyPoint(Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).get(0).getX(), Utilities.getPointOfIntersection(circleList.get(i), circleList.get(j)).get(0).getY());
+                        intersectionList.add(intersectionCircle);
+                        intersectionGroup.getChildren().add(intersectionCircle);
+                        addPointIntersection(intersectionCircle);
+                    }
                 }
             }
         }
 
-        //circle line
-        for (int i = 0; i < circleList.size(); i++) {
-            for (int j = 0; j < lineList.size(); j++) {
-                if (Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)) != null) {
-                    int y = 0;
-                    MyPoint intersectionLineCircle = new MyPoint(Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).get(0).getX(), Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).get(0).getY());
-                    intersectionList.add(intersectionLineCircle);
-                    //addPoint(intersectionLineCircle);
-                    y++;
+        for (int i = 0; i < lineList.size(); i++) {
+            for (int j = 0; j < circleList.size(); j++) {
+                if (Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).size() != 0) {
+                    for (int k = 0; k < Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).size(); k++) {
+                        MyPoint intersectionLineCircle = new MyPoint(Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).get(0).getX(), Utilities.getPointOfIntersection(lineList.get(i), circleList.get(j)).get(0).getY());
+                        intersectionGroup.getChildren().add(intersectionLineCircle);
+                        addPointIntersection(intersectionLineCircle);
+                    }
                 }
             }
         }
 
-        //adding intersections to pane
-        for (int i = 0; i < intersectionList.size(); i++) {
-            addPoint(intersectionList.get(i));
+    }
+
+    /**
+     * This method removes all intersection points
+     */
+    public static void clearIntersection() {
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            if (pane.getChildren().get(i) == intersectionGroup) {
+                pane.getChildren().remove(i);
+            }
         }
     }
 

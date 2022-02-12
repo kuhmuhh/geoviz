@@ -234,25 +234,27 @@ public class Utilities {
         double radius = circle1.getMyRadius();
         MyPoint center = circle1.getCenter();
 
-        double xm = center.getX();
-        double ym = center.getY();
+        double a = center.getX();
+        double b = center.getY();
         double slope = line1.getSlope();
-        double dLine1 = line1.getIntercept();
+        double d = line1.getIntercept();
 
         double help;
-        help = radius * radius * (1 + slope * slope) - ((ym - slope * xm - dLine1) * (ym - slope * xm - dLine1));
+        //help = radius * radius * (1 + slope * slope) - ((ym - slope * xm - dLine1) * (ym - slope * xm - dLine1));
+        help = (radius * radius) * (1 + (slope * slope) - ((b - (slope * a) - d)*(b - (slope * a) - d)));
 
         double x1;
-        x1 = (xm + ym * slope - dLine1 * slope + Math.sqrt(help)) / (1 + (slope * slope));
+        x1 = (a + (b * slope) - (d * slope) + Math.sqrt(help)) / (1 + (slope * slope));
         double y1;
         //y1 = line1.getSlope()*x1+line1.getIntercept();
-        y1 = (dLine1 + xm * slope + ym * slope + slope * Math.sqrt(help)) / (1 + slope * slope);
+        y1 = (d + (a * slope) + ((b * slope) * (b * slope)) + (slope * Math.sqrt(help))) / (1 + (slope * slope));
+        //y1 = (dLine1 + (a * slope) + (b * (slope * slope)) + (slope * Math.sqrt(help))) / (1 + (slope * slope));
 
         double x2;
-        x2 = (xm + ym * slope - dLine1 * slope - Math.sqrt(help)) / (1 + (slope * slope));
+        x2 = (a + (b * slope) - (d * slope) - Math.sqrt(help)) / (1 + (slope * slope));
         double y2;
         //y2 = line1.getSlope()*x2+line1.getIntercept();
-        y2 = (dLine1 + xm * slope + ym * slope - slope * Math.sqrt(help)) / (1 + slope * slope);
+        y2 = (d + (a * slope) + ((b * slope) * (b * slope)) - (slope * Math.sqrt(help))) / (1 + slope * slope);
 
         ArrayList<MyPoint> intersectionList = new ArrayList<>();
 
@@ -268,12 +270,7 @@ public class Utilities {
             intersectionList.add(intercept2);
             return intersectionList;
         } else {
-            //MyPoint filler = new MyPoint(NaN, NaN);
-            //MyPoint filler1 = new MyPoint(NaN, NaN);
-            //intersectionList.add(filler);
-            //intersectionList.add(filler1);
-            //return intersectionList;
-            return null;
+            return intersectionList;
         }
 
     }
@@ -301,12 +298,12 @@ public class Utilities {
         double distance = getDistance(circle1.getCenter(), circle2.getCenter());
 
         if (doubleComparison(distance, abs(r0 - r1))) {
-            //double x = ((r1 * (a - c)) / (r0 - r1)) + c;
-            //double y = ((r1 * (b - d)) / (r1 - r0)) + d;
+            double x = ((r1 * (a - c)) / (r0 - r1)) + c;
+            double y = ((r1 * (b - d)) / (r1 - r0)) + d;
 
-            //MyPoint intercept = new MyPoint(x, y);
-            //intersectionList.add(intercept);
-            return null;
+            MyPoint intercept = new MyPoint(x, y);
+            intersectionList.add(intercept);
+            return intersectionList;
         }
         if (doubleComparison(distance, (r0 + r1))) {
             double x = ((r1 * (a - c)) / (r0 + r1)) + c;
@@ -345,9 +342,9 @@ public class Utilities {
             return intersectionList;
         }
         if ((compareMyPoint(circle1.getCenter(), circle2.getCenter())) && doubleComparison(r0, r1)) {
-            return null;
+            return intersectionList;
         } else {
-            return null;
+            return intersectionList;
         }
 
 

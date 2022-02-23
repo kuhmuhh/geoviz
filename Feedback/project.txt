@@ -1,0 +1,102 @@
+=============================================================================================
+				    PK1 WS22 PROJECT GRADING
+=============================================================================================
+
+Task 1: Fundamental Methods
+=============================================================================================
+doubleComparison: 								[ 1 / 1 ]
+getSlope from two lines (four doubles): 					[ 1 / 1 ]
+round2: 									[ 1 / 1 ]
+getIntercept: 									[ 1 / 1 ]
+isParallel (equality check for two slope double values): 			[ 1 / 1 ]
+isOrthogonal (multipies two slope double values, checks for -1): 		[ 1 / 1 ]
+=============================================================================================
+TOTAL:										[ 6 / 6 ]
+
+Task 2: Object Orientation
+=============================================================================================
+MyPoint from two coordinates with getters:					[ 5 / 5 ]
+MyLine from two points, slope and intercept in constructor:			[ 5 / 5 ]
+getPointOfIntersection from two lines:						[ 5 / 5 ]
+=============================================================================================
+TOTAL:										[ 15 / 15 ]
+
+Task 3: Add Functionality
+=============================================================================================
+getDistance for euclidian distance between points:				[ 2 / 2 ]
+=============================================================================================
+TOTAL:										[ 2 / 2 ]
+
+Task 4: Geometric Objects
+=============================================================================================
+MyCircle from two points, provides radius (euclidian):				[ 5 / 5 ]
+=============================================================================================
+TOTAL:										[ 5 / 5 ]
+
+
+Task 5: Points of Intersection
+=============================================================================================
+intersection from line and circle:						[ 5 / 5 ]
+intersection from circle and circle:						[ 5 / 5 ]
+=============================================================================================
+TOTAL:										[ 10 / 10 ]
+
+
+Task 6: Read a Data File
+=============================================================================================
+DataReader for csv files:							[ 5 / 5 ]
+=============================================================================================
+TOTAL:										[ 5 / 5 ]
+
+
+Task 7: Structure a Visual Prototype
+=============================================================================================
+coordinate systen from individual lines:					[ 4 / 4 ]
+switch between lines and circles (top toolbar):					[ 1 / 1 ]
+filling shapes (top toolbar):							[ 1 / 1 ]
+highlighting intersection points (top toolbar):					[ 1 / 1 ]
+changing color (top toolbar):							[ 1 / 1 ]
+clear entire screen (bottom toolbar)						[ 1 / 1 ]
+load data file (bottom toolbar)							[ 1 / 1 ]
+=============================================================================================
+TOTAL:										[ 10 / 10 ]
+
+
+Task 8: Visualize Geometric Structure
+=============================================================================================
+extend JavaFX Circle in MyPoint:						[ 1 / 1 ]
+EventHandler for clicking on coordinate system:					[ 2 / 2 ]
+adding points to clicked location on coordinate system:				[ 2 / 2 ]
+select two points, create shape based on radio buttons:				[ 4 / 4 ]
+extend JavaFX Line in MyLine, use it for drawing:				[ 1 / 1 ]
+extend JavaFX Circle in MyCircle, use it for drawing:				[ 1 / 1 ]
+color and fill shapes as selected in toolbar:					[ 2 / 2 ]
+tooltips with information apepar when hovering objects:				[ 5 / 5 ]
+point tooltip with x and y coordinates:						[ 1 / 1 ]
+circle tooltip with coordinates of center and radius:				[ 1 / 1 ]
+line tooltip with slope and intercept:						[ 1 / 1 ]
+transform coordinates, 0 at bottom, inverse line slope:				[ 0 / 1 ]
+showing all intersection points via button:					[ 6 / 6 ]
+removing intersections points again after button click: 			[ 2 / 2 ]
+data points can be loaded from file:						[ 5 / 5 ]
+clear screen button works for removing points, lines and circle:		[ 2 / 2 ]
+=============================================================================================
+TOTAL:										[ 36 / 37 ]
+
+
+Style
+=============================================================================================
+TOTAL:										[ 10 / 10 ]
+
+
+NOTES
+=============================================================================================
+Well done, great code comments. And very nice interface, especially with the subtle separators.
+Creating lines and circles most of the time also creates a new point on top of the one clicked.
+A few more intersection points seem to show up than there actually are.
+Coordinates are supposed to be transformed so that origin is at bottom left.
+
+
+=============================================================================================
+PROJECT TOTAL:									[ 99 / 100 ]
+=============================================================================================
